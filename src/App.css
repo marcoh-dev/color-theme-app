@@ -3,6 +3,10 @@ body {
   padding: 10px;
 }
 
-.color-theme {
+.color-themes {
   padding: 0;
+}
+
+.color-theme {
+  list-style: none;
 }
