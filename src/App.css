@@ -2,3 +2,7 @@ body {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   padding: 10px;
 }
+
+.color-theme {
+  padding: 0;
+}
