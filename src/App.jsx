@@ -6,7 +6,11 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      // display colors here
+      <ul class="color-theme">
+        {initialColors.map((color) => (
+          <Color key={color.id} color={color} />
+        ))}
+      </ul>
     </>
   );
 }
