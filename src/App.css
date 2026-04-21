@@ -2,3 +2,11 @@ body {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   padding: 10px;
 }
+
+.color-themes {
+  padding: 0;
+}
+
+.color-theme {
+  list-style: none;
+}
