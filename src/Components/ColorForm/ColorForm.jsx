@@ -21,7 +21,7 @@ export default function ColorForm({ onSubmit, submitLabel, initialColorData }) {
           defaultValue={initialColorData.role}
           className="color-form__input  color-form__input--text"
           required
-        ></input>
+        />
       </section>
       <section className="color-form__section">
         <label className="color-form__label" htmlFor="hex">

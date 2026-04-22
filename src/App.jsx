@@ -18,13 +18,7 @@ function App() {
   }
 
   function handleColorUpdate(formData) {
-    setColors(
-      colors.map((color) =>
-        color.id === formData.id
-          ? { ...color, hex: formData.hex, role: formData.role, contrastText: formData.contrastText }
-          : color,
-      ),
-    );
+    setColors(colors.map((color) => (color.id === formData.id ? { ...color, ...formData } : color)));
   }
 
   function handleColorDelete(colorId) {
@@ -34,7 +28,7 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onSubmit={handleFormSubmit} initialColorData={defaultColorData} submitLabel="add color"></ColorForm>
+      <ColorForm onSubmit={handleFormSubmit} initialColorData={defaultColorData} submitLabel="add color" />
       <section className="color-themes">
         <ul className="color-theme">
           {colors.length == 0 ? (
@@ -51,8 +45,8 @@ function App() {
                 role={color.role}
                 hex={color.hex}
                 contrastText={color.contrastText}
-                onDelete={handleColorDelete}
-                onUpdate={handleColorUpdate}
+                onColorDelete={handleColorDelete}
+                onColorUpdate={handleColorUpdate}
               />
             ))
           )}

@@ -2,7 +2,7 @@ import "./Color.css";
 import { useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 
-export default function Color({ id, role, hex, contrastText, onDelete, onUpdate }) {
+export default function Color({ id, role, hex, contrastText, onColorDelete, onColorUpdate }) {
   const [isConfirmDeleteVisible, setIsConfirmDeleteVisible] = useState(false);
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
 
@@ -13,7 +13,7 @@ export default function Color({ id, role, hex, contrastText, onDelete, onUpdate 
   };
 
   function handleConfirmDelete() {
-    onDelete(id);
+    onColorDelete(id);
   }
 
   function showConfirmDelete() {
@@ -26,7 +26,7 @@ export default function Color({ id, role, hex, contrastText, onDelete, onUpdate 
 
   function handleUpdateForm(formData) {
     setIsEditFormVisible(false);
-    onUpdate({ id: id, ...formData });
+    onColorUpdate({ id: id, ...formData });
   }
 
   function showEditForm() {
@@ -44,7 +44,7 @@ export default function Color({ id, role, hex, contrastText, onDelete, onUpdate 
       <p className="color-card__contrast">contrast: {contrastText}</p>
       {isEditFormVisible ? (
         <section className="color-card__form">
-          <ColorForm onSubmit={handleUpdateForm} initialColorData={colorData} submitLabel="update color"></ColorForm>
+          <ColorForm onSubmit={handleUpdateForm} initialColorData={colorData} submitLabel="update color" />
         </section>
       ) : null}
       <section className="color-card__buttons">
