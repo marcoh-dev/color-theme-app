@@ -12,22 +12,22 @@ function App() {
     setColors([{ id: uid(), role: formData.role, hex: formData.hex, contrastText: formData.contrastText }, ...colors]);
   }
 
-  function handleColorDelete(uid) {
-    setColors(colors.filter((color) => color.id !== uid));
+  function handleColorDelete(colorId) {
+    setColors(colors.filter((color) => color.id !== colorId));
   }
 
   return (
     <>
       <h1>Theme Creator</h1>
       <ColorForm onSubmit={handleFormSubmit}></ColorForm>
-      <ul className="color-themes">
-        <li className="color-theme">
+      <section className="color-themes">
+        <ul className="color-theme">
           {colors.length == 0 ? (
-            <section className="no-color-card">
+            <li className="no-color-card">
               <p>
                 No colors... <strong>start by adding one!</strong>
               </p>
-            </section>
+            </li>
           ) : (
             colors.map((color) => (
               <Color
@@ -40,8 +40,8 @@ function App() {
               />
             ))
           )}
-        </li>
-      </ul>
+        </ul>
+      </section>
     </>
   );
 }
