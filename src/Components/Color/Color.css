@@ -1,6 +1,6 @@
 .color-card {
   margin: 0px 10px;
-  padding: 5px;
+  padding: 20px;
   list-style: none;
 }
 
@@ -30,4 +30,8 @@
 
 .color-card__confirm {
   flex-basis: 100%;
+}
+
+.color-card__form {
+  margin: 40px 0px;
 }
