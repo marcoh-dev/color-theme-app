@@ -1,12 +1,12 @@
 import { initialColors } from "./lib/colors";
 import "./App.css";
+import useLocalStorageState from "use-local-storage-state";
 import Color from "./Components/Color/Color";
 import ColorForm from "./Components/ColorForm/ColorForm";
 import { uid } from "uid";
-import { useState } from "react";
 
 function App() {
-  const [colors, setColors] = useState(initialColors);
+  const [colors, setColors] = useLocalStorageState("colors", { defaultValue: initialColors });
   const defaultColorData = {
     role: "some color",
     hex: "#000",
