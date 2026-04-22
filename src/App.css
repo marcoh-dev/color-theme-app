@@ -3,6 +3,17 @@ body {
   padding: 10px;
 }
 
+#root {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 40px;
+}
+
+label {
+  cursor: pointer;
+}
+
 .color-themes {
   padding: 0;
 }
