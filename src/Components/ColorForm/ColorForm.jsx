@@ -7,6 +7,7 @@ export default function ColorForm({ onSubmit, submitLabel, initialColorData }) {
     const formData = Object.fromEntries(new FormData(event.target));
     onSubmit(formData);
   }
+  console.log(initialColorData);
 
   return (
     <form className="color-form" onSubmit={handleSubmit}>
