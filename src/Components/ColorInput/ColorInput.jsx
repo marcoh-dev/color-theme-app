@@ -4,7 +4,7 @@ import "./ColorInput.css";
 export default function ColorInput({ id, defaultValue }) {
   const [colorValue, setColorValue] = useState(defaultValue);
 
-  function handleOnChange(event) {
+  function handleChange(event) {
     setColorValue(event.target.value);
   }
 
@@ -18,15 +18,15 @@ export default function ColorInput({ id, defaultValue }) {
         title="valid hexcode (# + 3/6 hex digits)"
         className="color-form__input color-form__input--text"
         value={colorValue}
-        onChange={handleOnChange}
+        onChange={handleChange}
         required
-      ></input>
+      />
       <input
         type="color"
         value={colorValue}
-        onChange={handleOnChange}
+        onChange={handleChange}
         className="color-form__input color-form__input--color"
-      ></input>
+      />
     </>
   );
 }
