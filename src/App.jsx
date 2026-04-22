@@ -7,9 +7,18 @@ import { useState } from "react";
 
 function App() {
   const [colors, setColors] = useState(initialColors);
+  const defaultColorData = {
+    role: "some color",
+    hex: "#000",
+    contrastText: "#fff",
+  };
 
   function handleFormSubmit(formData) {
     setColors([{ id: uid(), role: formData.role, hex: formData.hex, contrastText: formData.contrastText }, ...colors]);
+  }
+
+  function handleColorUpdate(formData) {
+    setColors(colors.map((color) => (color.id === formData.id ? { ...color, ...formData } : color)));
   }
 
   function handleColorDelete(colorId) {
@@ -19,7 +28,7 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onSubmit={handleFormSubmit}></ColorForm>
+      <ColorForm onSubmit={handleFormSubmit} initialColorData={defaultColorData} submitLabel="add color" />
       <section className="color-themes">
         <ul className="color-theme">
           {colors.length == 0 ? (
@@ -36,7 +45,8 @@ function App() {
                 role={color.role}
                 hex={color.hex}
                 contrastText={color.contrastText}
-                onDelete={handleColorDelete}
+                onColorDelete={handleColorDelete}
+                onColorUpdate={handleColorUpdate}
               />
             ))
           )}
