@@ -19,7 +19,7 @@ label {
 }
 
 .color-theme {
-  list-style: none;
+  padding: 0;
 }
 
 .no-color-card {
