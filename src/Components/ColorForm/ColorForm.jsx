@@ -1,0 +1,46 @@
+import "./ColorForm.css";
+import ColorInput from "../ColorInput/ColorInput";
+
+export default function ColorForm({
+  onSubmit,
+  initialColorData = { role: "some color", hex: "#000", contrastText: "#fff" },
+}) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = Object.fromEntries(new FormData(event.target));
+    onSubmit(formData);
+  }
+
+  return (
+    <form className="color-form" onSubmit={handleSubmit}>
+      <section className="color-form__section">
+        <label className="color-form__label" htmlFor="role">
+          Role
+        </label>
+        <input
+          type="text"
+          id="role"
+          name="role"
+          defaultValue={initialColorData.role}
+          className="color-form__input  color-form__input--text"
+          required
+        ></input>
+      </section>
+      <section className="color-form__section">
+        <label className="color-form__label" htmlFor="hex">
+          Hex
+        </label>
+        <ColorInput id="hex" defaultValue={initialColorData.hex} />
+      </section>
+      <section className="color-form__section">
+        <label className="color-form__label" htmlFor="contrastText">
+          Contrast Text
+        </label>
+        <ColorInput id="contrastText" defaultValue={initialColorData.contrastText} />
+      </section>
+      <section className="color-form__section">
+        <button className="color-form__button">add color</button>
+      </section>
+    </form>
+  );
+}
