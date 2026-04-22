@@ -1,18 +1,33 @@
 .color-card {
   margin: 0px 10px;
   padding: 5px;
+  list-style: none;
 }
 
-.color-card__headline {
+.color-card__highlight {
   display: inline;
   padding: 2px 6px;
-  background: black;
-  color: white;
+  background: #000;
+  color: #fff;
 }
 
 .color-card__role {
   font-weight: bold;
 }
 
-.color-card__contrast {
+.color-card__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 0;
+}
+
+.color-card__button {
+  border-radius: 10px;
+  padding: 0.2em 0.5em;
+  text-transform: uppercase;
+}
+
+.color-card__confirm {
+  flex-basis: 100%;
 }
