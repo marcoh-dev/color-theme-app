@@ -1,7 +1,8 @@
 import "./Color.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
+import ContrastCheck from "../ContrastCheck/ContrastCheck";
 
 export default function Color({ id, role, hex, contrastText, onColorDelete, onColorUpdate }) {
   const [isConfirmDeleteVisible, setIsConfirmDeleteVisible] = useState(false);
@@ -46,6 +47,7 @@ export default function Color({ id, role, hex, contrastText, onColorDelete, onCo
       </div>
       <p className="color-card__role">{role}</p>
       <p className="color-card__contrast">contrast: {contrastText}</p>
+      <ContrastCheck firstColor={hex} secondColor={contrastText} />
       {isEditFormVisible ? (
         <section className="color-card__form">
           <ColorForm onSubmit={handleUpdateForm} initialColorData={colorData} submitLabel="update color" />
