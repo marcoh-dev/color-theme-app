@@ -1,6 +1,7 @@
 import "./Color.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
+import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 
 export default function Color({ id, role, hex, contrastText, onColorDelete, onColorUpdate }) {
   const [isConfirmDeleteVisible, setIsConfirmDeleteVisible] = useState(false);
@@ -39,7 +40,10 @@ export default function Color({ id, role, hex, contrastText, onColorDelete, onCo
 
   return (
     <li className="color-card" style={{ backgroundColor: hex, color: contrastText }}>
-      <h2 className="color-card__highlight">{hex}</h2>
+      <div className="color-card__flexwrap">
+        <h2 className="color-card__highlight">{hex}</h2>
+        <CopyToClipboard copyValue={hex} />
+      </div>
       <p className="color-card__role">{role}</p>
       <p className="color-card__contrast">contrast: {contrastText}</p>
       {isEditFormVisible ? (
