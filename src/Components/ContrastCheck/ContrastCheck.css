@@ -1,0 +1,16 @@
+.contrast-check {
+  color: #000;
+  display: table;
+  padding: 0 5px;
+  background-color: #fff;
+}
+
+.contrast-check--green {
+  background-color: #6edc97;
+}
+.contrast-check--orange {
+  background-color: #ffba92;
+}
+.contrast-check--red {
+  background-color: #ff8080;
+}
