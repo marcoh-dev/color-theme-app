@@ -14,3 +14,7 @@
 .contrast-check--red {
   background-color: #ff8080;
 }
+
+.contrast-check__information {
+  cursor: default;
+}
