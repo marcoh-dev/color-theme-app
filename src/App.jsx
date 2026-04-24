@@ -32,16 +32,26 @@ function App() {
   }, [themes, themeLastAction, setCurrentTheme]);
 
   useEffect(() => {
-    setCurrentThemeColors(colors.filter((color) => currentTheme.colors.includes(color.id)));
-  }, [currentTheme, colors, setCurrentThemeColors]);
+    setCurrentThemeColors(filterAndSortColors);
+  }, [currentTheme]);
+
+  function filterAndSortColors() {
+    const currentThemeColorsOrder = new Map(currentTheme.colors.map((id, index) => [id, index]));
+
+    const colorsFilteredAndSorted = colors
+      .filter((color) => currentThemeColorsOrder.has(color.id))
+      .sort((a, b) => currentThemeColorsOrder.get(a.id) - currentThemeColorsOrder.get(b.id));
+
+    return colorsFilteredAndSorted;
+  }
 
   function handleColorCreate(formData) {
     const newColorId = uid();
 
     setColors([{ id: newColorId, role: formData.role, hex: formData.hex, contrastText: formData.contrastText }, ...colors]);
     setCurrentThemeColors([{ id: newColorId, role: formData.role, hex: formData.hex, contrastText: formData.contrastText }, ...colors]);
-    setThemes(themes.map((theme) => (theme.id === currentTheme.id ? { ...theme, colors: [...theme.colors, newColorId] } : theme)));
-    setCurrentTheme({ ...currentTheme, colors: [...currentTheme.colors, newColorId] });
+    setThemes(themes.map((theme) => (theme.id === currentTheme.id ? { ...theme, colors: [newColorId, ...theme.colors] } : theme)));
+    setCurrentTheme({ ...currentTheme, colors: [newColorId, ...currentTheme.colors] });
   }
 
   function handleColorUpdate(formData) {
@@ -51,7 +61,23 @@ function App() {
 
   function handleColorDelete(colorId) {
     setColors(colors.filter((color) => color.id !== colorId));
-    setCurrentThemeColors(colors.filter((color) => color.id !== colorId));
+
+    const colorsFilteredAndSorted = filterAndSortColors();
+
+    setCurrentThemeColors(colorsFilteredAndSorted.filter((color) => color.id !== colorId));
+  }
+
+  function handleColorMove(colorId, index, newIndex) {
+    const currentColorId = currentTheme.colors.slice(index, index + 1);
+    const colorsWithoutCurrentColorId = [...currentTheme.colors.slice(0, index), ...currentTheme.colors.slice(index + 1)];
+    const rearrangedColorIds = [
+      ...colorsWithoutCurrentColorId.slice(0, newIndex),
+      ...currentColorId,
+      ...colorsWithoutCurrentColorId.slice(newIndex),
+    ];
+
+    setThemes(themes.map((theme) => (theme.id === currentTheme.id ? { ...theme, colors: rearrangedColorIds } : theme)));
+    setCurrentTheme({ ...currentTheme, colors: rearrangedColorIds });
   }
 
   function handleThemeCreate(formData) {
@@ -127,7 +153,7 @@ function App() {
             </p>
           </li>
         ) : (
-          currentThemeColors.map((color) => (
+          currentThemeColors.map((color, i) => (
             <Color
               key={color.id}
               id={color.id}
@@ -136,6 +162,10 @@ function App() {
               contrastText={color.contrastText}
               onColorDelete={handleColorDelete}
               onColorUpdate={handleColorUpdate}
+              onColorMove={handleColorMove}
+              isFirst={i === 0}
+              isLast={i === currentThemeColors.length - 1}
+              index={i}
             />
           ))
         )}
