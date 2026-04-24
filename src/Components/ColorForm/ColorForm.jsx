@@ -9,7 +9,7 @@ export default function ColorForm({ onColorCreate, submitLabel, initialColorData
   }
 
   return (
-    <form className="color-form" onSubmit={handleSubmit}>
+    <form className="color-form" autoComplete="off" onSubmit={handleSubmit}>
       <section className="color-form__section">
         <label className="color-form__label" htmlFor="role">
           Role
