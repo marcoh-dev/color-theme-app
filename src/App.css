@@ -28,3 +28,11 @@ label {
   padding: 5px;
   display: table;
 }
+
+.theme-select {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0px 10px;
+}
