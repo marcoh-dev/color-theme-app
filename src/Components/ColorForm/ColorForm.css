@@ -16,6 +16,7 @@
 
 .color-form__label {
   font-weight: bold;
+  flex-basis: 100%;
 }
 
 .color-form__input {
