@@ -1,4 +1,4 @@
-.color-form {
+.theme-form {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -7,32 +7,38 @@
   margin: 0px 10px;
 }
 
-.color-form__section {
+.theme-form__section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }
 
-.color-form__label {
+.theme-form__select {
+  line-height: 3em;
+  padding: 0.28em 0.5em;
+  border-radius: 10px;
+}
+
+.theme-form__label {
   font-weight: bold;
   flex-basis: 100%;
 }
 
-.color-form__input {
+.theme-form__input {
   border-radius: 10px;
 }
 
-.color-form__input--text {
+.theme-form__input--text {
   padding: 0.2em 0.5em;
 }
 
-.color-form__input--text:focus,
-.color-form__input--text:hover {
+.theme-form__input--text:focus,
+.theme-form__input--text:hover {
   background-color: #eee;
 }
 
-.color-form__button {
+.theme-form__button {
   border-radius: 10px;
   padding: 0.2em 0.5em;
   text-transform: uppercase;
