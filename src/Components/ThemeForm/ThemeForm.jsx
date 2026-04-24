@@ -30,7 +30,7 @@ export default function ThemeForm({ theme, formMode, onThemeCreate, onThemeUpdat
   }
 
   return (
-    <form className="theme-form" onSubmit={handleSubmit}>
+    <form className="theme-form" autoComplete="off" onSubmit={handleSubmit}>
       <section className="theme-form__section">
         {formMode === "edit" ? (
           <>
