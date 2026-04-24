@@ -4,7 +4,7 @@ import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 import ContrastCheck from "../ContrastCheck/ContrastCheck";
 
-export default function Color({ id, role, hex, contrastText, onColorDelete, onColorUpdate }) {
+export default function Color({ id, role, hex, contrastText, onColorDelete, onColorUpdate, onColorMove, isFirst, isLast, index }) {
   const [isConfirmDeleteVisible, setIsConfirmDeleteVisible] = useState(false);
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
 
@@ -31,6 +31,10 @@ export default function Color({ id, role, hex, contrastText, onColorDelete, onCo
     onColorUpdate({ id: id, ...formData });
   }
 
+  function handleColorMove(direction) {
+    onColorMove(id, index, index + direction);
+  }
+
   function showEditForm() {
     setIsEditFormVisible(true);
   }
@@ -41,6 +45,16 @@ export default function Color({ id, role, hex, contrastText, onColorDelete, onCo
 
   return (
     <li className="color-card" style={{ backgroundColor: hex, color: contrastText }}>
+      {!isFirst ? (
+        <button className="color-card__move-color color-card__move-color--backwards" onClick={() => handleColorMove(-1)}>
+          ▲
+        </button>
+      ) : null}
+      {!isLast ? (
+        <button className="color-card__move-color color-card__move-color--forwards" onClick={() => handleColorMove(1)}>
+          ▼
+        </button>
+      ) : null}
       <div className="color-card__flexwrap">
         <h2 className="color-card__highlight">{hex}</h2>
         <CopyToClipboard copyValue={hex} />
@@ -50,7 +64,7 @@ export default function Color({ id, role, hex, contrastText, onColorDelete, onCo
       <ContrastCheck firstColor={hex} secondColor={contrastText} />
       {isEditFormVisible ? (
         <section className="color-card__form">
-          <ColorForm onSubmit={handleUpdateForm} initialColorData={colorData} submitLabel="update color" />
+          <ColorForm onColorCreate={handleUpdateForm} initialColorData={colorData} submitLabel="update color" />
         </section>
       ) : null}
       <section className="color-card__buttons">
