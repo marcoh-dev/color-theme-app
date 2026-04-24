@@ -1,11 +1,11 @@
 import "./ColorForm.css";
 import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm({ onSubmit, submitLabel, initialColorData }) {
+export default function ColorForm({ onColorCreate, submitLabel, initialColorData }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(event.target));
-    onSubmit(formData);
+    onColorCreate(formData);
   }
 
   return (
