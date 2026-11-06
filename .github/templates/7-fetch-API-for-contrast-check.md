@@ -25,12 +25,12 @@ This is how you can send data to an API, it is called a post request.
 
 ```javascript
 async function postFetch() {
-  const response = await fetch("https://www.some-api-url.com/api", {
-    method: "POST",
-    body: JSON.stringify({ cool: true }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+	const response = await fetch("https://www.some-api-url.com/api", {
+		method: "POST",
+		body: JSON.stringify({ cool: true }),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
 }
 ```
