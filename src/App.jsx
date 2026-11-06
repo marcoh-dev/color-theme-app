@@ -4,9 +4,9 @@ import { initialThemes } from "./lib/themes";
 import { useEffect } from "react";
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
-import Color from "./Components/Color/Color";
-import ColorForm from "./Components/ColorForm/ColorForm";
-import ThemeForm from "./Components/ThemeForm/ThemeForm";
+import Color from "./components/Color/Color";
+import ColorForm from "./components/ColorForm/ColorForm";
+import ThemeForm from "./components/ThemeForm/ThemeForm";
 
 function App() {
   const [colors, setColors] = useLocalStorageState("colors", { defaultValue: initialColors });
