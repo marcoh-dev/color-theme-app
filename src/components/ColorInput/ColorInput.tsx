@@ -1,10 +1,18 @@
-import "./ColorInput.css";
-import { useState } from "react";
+import { type ChangeEvent, useState } from "react";
 
-export default function ColorInput({ id, defaultValue }) {
+import "./ColorInput.css";
+
+type ColorInputProps = {
+	id: string;
+	name: string;
+	label: string;
+	defaultValue: string;
+};
+
+export default function ColorInput({ id, name, label, defaultValue }: ColorInputProps) {
 	const [colorValue, setColorValue] = useState(defaultValue);
 
-	function handleChange(event) {
+	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		setColorValue(event.target.value);
 	}
 
@@ -13,7 +21,7 @@ export default function ColorInput({ id, defaultValue }) {
 			<input
 				type="text"
 				id={id}
-				name={id}
+				name={name}
 				pattern="^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$"
 				title="valid hexcode (# + 3/6 hex digits)"
 				className="color-form__input color-form__input--text"
@@ -23,6 +31,7 @@ export default function ColorInput({ id, defaultValue }) {
 			/>
 			<input
 				type="color"
+				aria-label={`${label} color picker`}
 				value={colorValue}
 				onChange={handleChange}
 				className="color-form__input color-form__input--color"
