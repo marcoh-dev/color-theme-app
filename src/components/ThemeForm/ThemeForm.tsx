@@ -1,4 +1,17 @@
+import type { FormEvent, MouseEvent } from "react";
+
+import type { Theme, ThemeFormMode } from "@/types";
+
 import "./ThemeForm.css";
+
+type ThemeFormProps = {
+	theme: Theme;
+	formMode: ThemeFormMode;
+	onThemeCreate: (name: string) => void;
+	onThemeUpdate: (name: string) => void;
+	onThemeDelete: () => void;
+	onThemeCancel: () => void;
+};
 
 export default function ThemeForm({
 	theme,
@@ -7,17 +20,17 @@ export default function ThemeForm({
 	onThemeUpdate,
 	onThemeDelete,
 	onThemeCancel,
-}) {
-	function handleSubmit(event) {
+}: ThemeFormProps) {
+	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		const formData = Object.fromEntries(new FormData(event.target));
+		const name = String(new FormData(event.currentTarget).get("name") ?? "");
 
 		switch (formMode) {
 			case "edit":
-				onThemeUpdate(formData);
+				onThemeUpdate(name);
 				break;
 			case "create":
-				onThemeCreate(formData);
+				onThemeCreate(name);
 				break;
 			case "delete":
 				onThemeDelete();
@@ -27,12 +40,13 @@ export default function ThemeForm({
 				break;
 		}
 	}
-	function cancelForm(event) {
+
+	function cancelForm(event: MouseEvent<HTMLButtonElement>) {
 		event.preventDefault();
 		onThemeCancel();
 	}
 
-	if (formMode == "") {
+	if (formMode === "") {
 		return null;
 	}
 

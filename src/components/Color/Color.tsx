@@ -1,57 +1,36 @@
-import "./Color.css";
 import { useState } from "react";
-import ColorForm from "../ColorForm/ColorForm";
-import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
-import ContrastCheck from "../ContrastCheck/ContrastCheck";
+
+import ColorForm from "@/components/ColorForm/ColorForm";
+import ContrastCheck from "@/components/ContrastCheck/ContrastCheck";
+import CopyToClipboard from "@/components/CopyToClipboard/CopyToClipboard";
+import type { Color as ColorType, ColorData } from "@/types";
+
+import "./Color.css";
+
+type ColorProps = {
+	color: ColorType;
+	isFirst: boolean;
+	isLast: boolean;
+	onColorDelete: (colorId: string) => void;
+	onColorUpdate: (color: ColorType) => void;
+	onColorMove: (colorId: string, direction: -1 | 1) => void;
+};
 
 export default function Color({
-	id,
-	role,
-	hex,
-	contrastText,
+	color,
+	isFirst,
+	isLast,
 	onColorDelete,
 	onColorUpdate,
 	onColorMove,
-	isFirst,
-	isLast,
-	index,
-}) {
+}: ColorProps) {
 	const [isConfirmDeleteVisible, setIsConfirmDeleteVisible] = useState(false);
 	const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+	const { id, role, hex, contrastText } = color;
 
-	const colorData = {
-		role: role,
-		hex: hex,
-		contrastText: contrastText,
-	};
-
-	function handleConfirmDelete() {
-		onColorDelete(id);
-	}
-
-	function showConfirmDelete() {
-		setIsConfirmDeleteVisible(true);
-	}
-
-	function hideConfirmDelete() {
-		setIsConfirmDeleteVisible(false);
-	}
-
-	function handleUpdateForm(formData) {
+	function handleUpdateForm(colorData: ColorData) {
 		setIsEditFormVisible(false);
-		onColorUpdate({ id: id, ...formData });
-	}
-
-	function handleColorMove(direction) {
-		onColorMove(id, index, index + direction);
-	}
-
-	function showEditForm() {
-		setIsEditFormVisible(true);
-	}
-
-	function hideEditForm() {
-		setIsEditFormVisible(false);
+		onColorUpdate({ id, ...colorData });
 	}
 
 	return (
@@ -59,7 +38,8 @@ export default function Color({
 			{!isFirst ? (
 				<button
 					className="color-card__move-color color-card__move-color--backwards"
-					onClick={() => handleColorMove(-1)}
+					onClick={() => onColorMove(id, -1)}
+					aria-label="Move color up"
 				>
 					▲
 				</button>
@@ -67,7 +47,8 @@ export default function Color({
 			{!isLast ? (
 				<button
 					className="color-card__move-color color-card__move-color--forwards"
-					onClick={() => handleColorMove(1)}
+					onClick={() => onColorMove(id, 1)}
+					aria-label="Move color down"
 				>
 					▼
 				</button>
@@ -82,8 +63,8 @@ export default function Color({
 			{isEditFormVisible ? (
 				<section className="color-card__form">
 					<ColorForm
-						onColorCreate={handleUpdateForm}
-						initialColorData={colorData}
+						onSubmitColor={handleUpdateForm}
+						initialColorData={{ role, hex, contrastText }}
 						submitLabel="update color"
 					/>
 				</section>
@@ -94,23 +75,35 @@ export default function Color({
 						<div className="color-card__confirm">
 							<h3 className="color-card__highlight">Really delete?</h3>
 						</div>
-						<button className="color-card__button" onClick={hideConfirmDelete}>
+						<button
+							className="color-card__button"
+							onClick={() => setIsConfirmDeleteVisible(false)}
+						>
 							Cancel
 						</button>
-						<button className="color-card__button" onClick={handleConfirmDelete}>
+						<button className="color-card__button" onClick={() => onColorDelete(id)}>
 							Delete
 						</button>
 					</>
 				) : isEditFormVisible ? (
-					<button className="color-card__button" onClick={hideEditForm}>
+					<button
+						className="color-card__button"
+						onClick={() => setIsEditFormVisible(false)}
+					>
 						Cancel
 					</button>
 				) : (
 					<>
-						<button className="color-card__button" onClick={showConfirmDelete}>
+						<button
+							className="color-card__button"
+							onClick={() => setIsConfirmDeleteVisible(true)}
+						>
 							Delete
 						</button>
-						<button className="color-card__button" onClick={showEditForm}>
+						<button
+							className="color-card__button"
+							onClick={() => setIsEditFormVisible(true)}
+						>
 							Edit
 						</button>
 					</>

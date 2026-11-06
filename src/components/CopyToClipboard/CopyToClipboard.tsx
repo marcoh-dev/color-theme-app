@@ -1,12 +1,20 @@
-import "./CopyToClipboard.css";
 import { useEffect, useState } from "react";
+
+import "./CopyToClipboard.css";
+
+type CopyToClipboardProps = {
+	copyValue: string;
+	buttonLabel?: string;
+	copySuccessLabel?: string;
+	timeout?: number;
+};
 
 export default function CopyToClipboard({
 	copyValue,
 	buttonLabel = "copy",
 	copySuccessLabel = "successfully copied!",
 	timeout = 3000,
-}) {
+}: CopyToClipboardProps) {
 	const [isCopied, setIsCopied] = useState(false);
 
 	useEffect(() => {
@@ -26,16 +34,12 @@ export default function CopyToClipboard({
 			await navigator.clipboard.writeText(copyValue);
 			setIsCopied(true);
 		} catch (error) {
-			console.error(error.message);
+			console.error(error);
 		}
 	}
 
 	return (
-		<button
-			className="color-card__button"
-			onClick={handleClick}
-			disabled={isCopied ? true : false}
-		>
+		<button className="color-card__button" onClick={handleClick} disabled={isCopied}>
 			{isCopied ? copySuccessLabel : buttonLabel}
 		</button>
 	);
