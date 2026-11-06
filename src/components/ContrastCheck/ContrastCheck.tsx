@@ -28,7 +28,7 @@ async function fetchContrastRating(
 	signal: AbortSignal,
 ): Promise<ContrastResult> {
 	try {
-		const response = await fetch("https://www.aremycolorsaccessible.com/api/are-they", {
+		const response = await fetch("https://aremycolorsaccessible.com/api/are-they", {
 			mode: "cors",
 			method: "POST",
 			body: JSON.stringify({ colors: [firstColor, secondColor] }),
