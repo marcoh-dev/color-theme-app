@@ -21,7 +21,7 @@ https://www.aremycolorsaccessible.com/api-page
 
 ## Development
 
-Requirements: Node 24 (`nvm use`) and [pnpm](https://pnpm.io/installation) 12. npm is blocked in this project.
+Requirements: Node 24 (`fnm use`) and [pnpm](https://pnpm.io/installation) 12. npm is blocked in this project.
 
 ```bash
 pnpm install
