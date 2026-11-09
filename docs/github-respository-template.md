@@ -29,5 +29,5 @@ Click on the "Use this template" button on the GitHub template repository page t
 Start the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
