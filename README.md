@@ -21,18 +21,18 @@ https://www.aremycolorsaccessible.com/api-page
 
 ## Development
 
-Requirements: Node 24 (`nvm use`).
+Requirements: Node 24 (`nvm use`) and [pnpm](https://pnpm.io/installation) 12. npm is blocked in this project.
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
-- `npm run build` to build the app
-- `npm test` to run the tests (`npm run test:watch` in watch mode)
-- `npm run lint` / `npm run lint:fix` to run ESLint
-- `npm run format` / `npm run format:check` to run Prettier
-- `npm run typecheck` to check the types
-- `npm run check` to run lint, format check and typecheck
-- `npm run sync` to switch to `main`, pull and install dependencies if `package-lock.json` changed
-- `npm run sync:branch` to merge `main` into the current branch (without committing) and install if needed
+- `pnpm build` to build the app
+- `pnpm test` to run the tests (`pnpm test:watch` in watch mode)
+- `pnpm lint` / `pnpm lint:fix` to run ESLint
+- `pnpm format` / `pnpm format:check` to run Prettier
+- `pnpm typecheck` to check the types
+- `pnpm check` to run lint, format check and typecheck
+- `pnpm sync` to switch to `main`, pull and install dependencies
+- `pnpm sync:branch` to merge `main` into the current branch (without committing) and install dependencies
